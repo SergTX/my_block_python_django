@@ -1,0 +1,15 @@
+
+Blog data , models , fields
+
+
+POST model  - with title, excerpt, image name, date, slug, content- relation - one - to -many
+AUTHOR model - first, last name, email address - relation - one - to -many
+TAG model - caption  - relations - many - to -many
+
+
+
+relations -
+      one-to-many , ( one post written by one author, one author has to many posts)
+      many - to -many  - one tag can have multiple posts and post can have multiple tags
+
+

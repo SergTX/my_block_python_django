@@ -1,0 +1,17 @@
+django-admin startproject my_site
+python manage.py makemigrations    - prepares
+python manage.py migrate           - create a table for the app
+python manage.py shell             - interactive shellpython manage.py shell
+python manage.py createsuperuser   - creates user admin/admin email - jappreciate26@bk.ru
+
+
+
+
+
+##### DB ########
+
+from blog.models import TestTableBook   - importing table
+harry_potter = TestTableBook(title="Harry Potter part 1", rating=5)   - giving values to the object
+harry_potter.save()   - saving the object to the table
+TestTableBook.objects.all()
+TestTableBook.objects.all()[1].is_bestSelling

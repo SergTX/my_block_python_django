@@ -1,0 +1,103 @@
+create an app - blog
+create urls.py in the blog - add urls to it urlpatterns
+views.py - create functions for pages
+add func to urls.py + give some name
+wired up local blog/urls.py to project urls.py - import include and use it
+adding templates folder in app blog, such templates/blog/.html file
+adding global templates folder - base.html, adding paths inside settings.py
+adding - header , css files
+getting more templates - creating html for posts - more dynamic
+adding a function for all posts ( view.py ) to be able to see that page
+wiring up urls
+
+
+
+ --- db setup - using sqlite3
+ in the app - blog/ models - create a class with inheriting models.Model class from django.db models
+ then give column names and provide needed parameters
+ - title = models.CharField(mac_length= 50)
+ - rating = models.IntegerField()
+
+ add app  to setting.py
+ in app/migrations folder should be exist -
+ in terminal , in project folder- execute -
+      python manage.py makemigrations   - it will prepare a table with operation file
+      under app file 0001_Initial.py file should appear
+
+  to create a table next command is -
+    python manage.py migrate   - - create a table for the app
+    file db.sqlite3 will be different now
+
+in terminal - python manage.py shell
+from 'app'.models import class
+from blog.models import TestTableBook
+ - insert data - harry_potter = TestTableBook(title="Harry Potter part 1", rating=5)
+    it will create an object of harry potter
+ in django we have object.save() method which can save data into the table
+ - django will construct sql query like "insert into books ( title, rating ) values ('Lord of the Rings', 5)"
+- harry_potter.save()
+ --- see data
+TestTableBook.objects.all()   - gives you a list of all stored data
+
+-- update db
+first = TestTableBook.objects.all()[0]   - getting the object again
+sec = TestTableBook.objects.all()[1]
+third = TestTableBook.objects.all()[2]
+third.title -to see title of the book
+
+---setting
+first.author = "I have know idea"
+first.is_bestSelling = True
+then first.save()
+TestTableBook.objects.all()[0].author   - to see updated data
+
+--- delete data
+set object to delete - sec = TestTableBook.objects.all()[1]
+calling delete methode sec.delete()   - (1, {'blog.TestTableBook': 1}) - response will be like
+
+--- creating instantly
+TestTableBook.objects.create(title="book 1", rating=3, author='Not known', is_bestSelling = True)
+
+--- get data/filtering
+TestTableBook.objects.get(id=3)   - give you book with id 3 , id not reassign , forever gone
+get() - will return unique value
+
+TestTableBook.objects.filter(is_bestSelling=True)   - can return multiple results
+
+TestTableBook.objects.filter(rating__lt=3)    - __lt - means lower then , __lte means lower = then
+TestTableBook.objects.filter(title__contains="Story")  - case sensitive
+
+--- to run queries with OR , have to import " from django.db.models import Q"
+TestTableBook.objects.filter(Q(title__contains="Story") | Q(is_bestSelling=True))
+
+
+###########   Setup data ###############
+start from models - creating Classes
+- adding class Post with fields
+- adding class Author with fields
+- adding one-to-many relations - between Author and Post class
+   - adding author = models.ForeignKey(Author, on_delete=models.SET_NULL()) under Post
+- adding class Tag with field
+- adding many-to-many relations between Tag and Author with Post by adding     tags = models.ManyToManyField(Tag) inside Post
+
+##### registering in admin panel in admin.py
+-import classes and admin.site.register(Post) all classes
+
+###### running migrations
+cd my_site - python .\manage.py makemigrations
+python manage.py migrate
+
+
+##### getting data from db no
+- import Post from models
+- in starting Page build a query
+
+
+
+
+
+
+
+
+
+
